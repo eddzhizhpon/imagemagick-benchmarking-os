@@ -19,19 +19,31 @@ def plot_time_results(l_dataset, w_dataset):
 
     fig, axs = plt.subplots(2, 1, figsize=(8, 6))
 
-    axs[0].plot(x1, l_dataset['gray'])
-    axs[0].plot(x1, l_dataset['color_histograma'])
-    axs[0].plot(x1, l_dataset['gray_histograma'])
+    (markers, stemlines, baseline) = axs[0].stem(x1, l_dataset['gray'], 'silver', markerfmt='o')
+    plt.setp(markers, markersize=3, color="dodgerblue")
+
+    (markers, stemlines, baseline) = axs[0].stem(x1, l_dataset['color_histograma'], 'silver', markerfmt='o')
+    plt.setp(markers, markersize=3, color="mediumseagreen")
+
+    (markers, stemlines, baseline) = axs[0].stem(x1, l_dataset['gray_histograma'], 'silver', markerfmt='o')
+    plt.setp(markers, markersize=3, color="salmon")
+
     axs[0].set_title("Tiempos de conversión - Linux")
-    axs[0].set_ylabel("Tiempo")
+    axs[0].set_ylabel("Tiempo [s]")
     axs[0].set_xlabel("N imagen")
     axs[0].legend(labels)
 
-    axs[1].plot(x2, w_dataset['gray'])
-    axs[1].plot(x2, w_dataset['color_histograma'])
-    axs[1].plot(x2, w_dataset['gray_histograma'])
+    (markers, stemlines, baseline) = axs[1].stem(x2, w_dataset['gray'], 'silver', markerfmt='o')
+    plt.setp(markers, markersize=3, color="dodgerblue")
+
+    (markers, stemlines, baseline) = axs[1].stem(x2, w_dataset['color_histograma'], 'silver', markerfmt='o')
+    plt.setp(markers, markersize=3, color="mediumseagreen")
+
+    (markers, stemlines, baseline) = axs[1].stem(x2, w_dataset['gray_histograma'], 'silver', markerfmt='o')
+    plt.setp(markers, markersize=3, color="salmon")
+
     axs[1].set_title("Tiempos de conversión - Windows")
-    axs[1].set_ylabel("Tiempo")
+    axs[1].set_ylabel("Tiempo [s]")
     axs[1].set_xlabel("N imagen")
     axs[1].legend(labels)
 
@@ -55,7 +67,7 @@ def plot_bat_total_time(l_dataset, w_dataset):
     rects1 = ax.bar(x - width/2, linux, width, label='Linux')
     rects2 = ax.bar(x + width/2, windows, width, label='Windows')
     
-    ax.set_ylabel('Tiempo Total')
+    ax.set_ylabel('Tiempo Total [s]')
     ax.set_title('Tiempo de ejecución')
     ax.set_xticks(x)
     ax.set_xticklabels(labels)

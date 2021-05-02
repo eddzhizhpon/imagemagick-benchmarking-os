@@ -9,6 +9,7 @@ buildings/
 # ALL
 *.csv
 *.txt
+*.zip
 
 # Folder
 images_linux/

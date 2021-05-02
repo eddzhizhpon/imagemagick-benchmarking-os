@@ -1,6 +1,6 @@
 from matplotlib.backends.backend_pdf import PdfPages
 from matplotlib import pyplot as plt
-from PyPDF2 import PdfFileMerger, PdfFileReader
+from PyPDF2 import PdfFileMerger, PdfFileReader, PdfFileWriter
 import numpy as np
 import matplotlib.image as mpimg
 import sys
@@ -75,7 +75,7 @@ class RunBenchmark:
                                             execution_time)
             self.save_to_pdf(plt, image_file_name + ".pdf")
             i += 1
-        
+        self.generate_report_pdf()
         with open ('time_execution.txt','a') as f:
             f.write(f" \n>> Tiempo {_OS}: " + str(self.total_time))
             f.close()
@@ -84,6 +84,7 @@ class RunBenchmark:
             write = csv.writer(f)
             write.writerows(self.execution_times)
             f.close()
+        
             
     def run_on_linux(self, image_path_name, folder_name, image_file_name):
         ## Llamada a los Scripts
@@ -213,16 +214,22 @@ class RunBenchmark:
             pdf.savefig( fig )
         pdf.close()
 
-    def generate_report_pdf(self, path):
+    def generate_report_pdf(self):
         
         print("\n\t Generando Informe PDF...\n")
         pdfs_files = os.listdir(self.pdf_tmp)
-        merger = PdfFileMerger()
-        for pdf in pdfs_files:
-            pdf_file = open(self.pdf_tmp + pdf, 'rb')
-            merger.append(pdf_file)
-            pdf_file.close()
-        with open(path, "wb") as fout:
-            merger.write(fout)
-        merger.close()
+
+        input_streams = []
+        try:
+            for input_file in pdfs_files:
+                input_streams.append(open(self.pdf_tmp + input_file, 'rb'))
+            writer = PdfFileWriter()
+            for reader in map(PdfFileReader, input_streams):
+                for n in range(reader.getNumPages()):
+                    writer.addPage(reader.getPage(n))
+            writer.write(open(self.pdf_out_name, 'wb'))
+        finally:
+            for f in input_streams:
+                f.close()
+
         print("\t Generación terminada.\n")
