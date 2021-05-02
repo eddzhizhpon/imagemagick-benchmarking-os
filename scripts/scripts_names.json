@@ -1,0 +1,11 @@
+{   
+    "L_GENERAL_BENCHMARK": "./scripts/linux_benchmark.sh",
+    "L_GRAY_CONVERT": "./scripts/linux_gray.sh",
+    "L_COLOR_HISTOGRAM": "./scripts/linux_color_histograma.sh",
+    "L_GRAY_HISTOGRAM": "./scripts/linux_gray_histograma.sh",
+
+    "W_GENERAL_BENCHMARK": ".\\scripts\\windows_benchmark.bat",
+    "W_GRAY_CONVERT": ".\\scripts\\windows_gray.bat",
+    "W_COLOR_HISTOGRAM": ".\\scripts\\windows_color_histograma.bat",
+    "W_GRAY_HISTOGRAM": ".\\scripts\\windows_gray_histograma.bat"
+}

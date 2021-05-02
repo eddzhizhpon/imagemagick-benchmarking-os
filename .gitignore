@@ -1,0 +1,17 @@
+
+# Python
+__pycache__/
+ 
+# Images folders
+BSDS300/
+buildings/
+
+# ALL
+*.csv
+*.txt
+
+# Folder
+images_linux/
+windows_linux/
+pdfs/
+.pdfs/
