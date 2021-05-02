@@ -1,0 +1,1 @@
+# imagemagick-benchmarking-os
